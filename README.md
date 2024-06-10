@@ -28,8 +28,8 @@ mpiexec -n <number of processors> ./allshortestpair <file>
 ## Benchmark
 The benchmark was performed on a virtual machine on a single CPU machine with 4 physical cores, and 8 logical ones due to hyper-threading.
 
-| Matrix size | Time on 1 processor in seconds | Time on 4 processors in seconds | Speedup | Efficiency |
+| Matrix size | Time on 1 processor | Time on 4 processors | Speedup | Efficiency |
 | ----- | :---: | :---: | :---: | :---:  |
-| 1000 × 1000  | 1,7 | 0,55  | 3 | 0,75 |
-| 3000 × 3000  | 38 | 12 | 3,16 | 0,79 |
-| 5000 × 5000  | 174 | 55  | 3,16 | 0,79 |
+| 1000 × 1000  | 1,7 seconds | 0,55 seconds | 3 | 0,75 |
+| 3000 × 3000  | 38 seconds | 12 seconds | 3,16 | 0,79 |
+| 5000 × 5000  | 174 seconds | 55 seconds | 3,16 | 0,79 |
