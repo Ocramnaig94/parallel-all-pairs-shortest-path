@@ -19,3 +19,17 @@ make all
 ./gen_adj_matrix <matrix size> <file> optional: <max weight>
 ```
 * Alternatively, as the input square matrix a predefined one inside the homonymous folder `matrices` can be used.
+
+* Run the APSP algorithm by providing the number of processors, which must be a [perfect square](https://en.wikipedia.org/wiki/Square_number), and the binary file containing the adjacency matrix
+```
+mpiexec -n <number of processors> ./allshortestpair <file>
+```
+
+## Benchmark
+The benchmark was performed on a virtual machine on a single CPU machine with 4 physical cores, and 8 logical ones due to hyper-threading.
+
+| Matrix size | Time on 1 processor in seconds | Time on 4 processors in seconds | Speedup | Efficiency |
+| ----- | :---: | :---: | :---: | :---:  |
+| 1000 × 1000  | 1,7 | 0,55  | 3 | 0,75 |
+| 3000 × 3000  | 38 | 12 | 3,16 | 0,79 |
+| 5000 × 5000  | 174 | 55  | 3,16 | 0,79 |
