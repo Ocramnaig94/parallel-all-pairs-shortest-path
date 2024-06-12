@@ -16,8 +16,10 @@ int main(int argc, char **argv){
 	if (argc != 2) {
 		if (!rank){
 			fprintf(stderr, "Usage: %s <matrix file>\n", argv[0]);
+			MPI_Barrier(MPI_COMM_WORLD);
  			MPI_Abort(MPI_COMM_WORLD, INPUT_ERROR);
  		}
+ 		MPI_Barrier(MPI_COMM_WORLD);
    	}
 
 	// Check if perfect square
@@ -26,8 +28,10 @@ int main(int argc, char **argv){
 	if ((i * i) != grid.p){
 		if (!rank){
 			fprintf(stderr, "Number of processors must be a perfect square\n");
+			MPI_Barrier(MPI_COMM_WORLD);
 			MPI_Abort(MPI_COMM_WORLD, PROC_ERROR);
 		}
+		MPI_Barrier(MPI_COMM_WORLD);
 	}
 	else
 		grid.q = (int) sqrt(grid.p);

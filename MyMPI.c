@@ -37,6 +37,7 @@ int **manage_matrix(GRID *grid, char *filename){
 		filein = fopen(filename, "rb");
     	if (!filein){
 			fprintf(stderr, "File: %s not found\n", filename); 
+			MPI_Barrier(MPI_COMM_WORLD);
 			MPI_Abort(MPI_COMM_WORLD, OPEN_ERROR);
 		}
 		
@@ -45,10 +46,12 @@ int **manage_matrix(GRID *grid, char *filename){
    		if (grid->q > grid->dim){
 			fprintf(stderr, "Too many processors\n");
 			fclose(filein);
+			MPI_Barrier(MPI_COMM_WORLD);
 			MPI_Abort(MPI_COMM_WORLD, PROC_ERROR);
 		}
     }
 
+    MPI_Barrier(MPI_COMM_WORLD);
 	MPI_Bcast(&(grid->dim), 1, MPI_LONG, ((grid->p)-1), grid->com);
 
 	// Set dimension for all submatrices
