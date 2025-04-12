@@ -14,6 +14,6 @@ jobs:
     - name: build
       run: |
         mpicc -O3 -o allshortestpair MyMPI.c allshortestpair.c -lm
-        mpicc -O3 -o allshortestpair gen_adj_matrix.c
+        mpicc -O3 -o gen_adj_matrix gen_adj_matrix.c
     - name: exec matrix 1000x1000
       run: mpiexec -n 4 ./allshortestpair ./matrices/1000.bin
