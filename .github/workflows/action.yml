@@ -2,11 +2,11 @@ name: Run parallel algorithm
 on:
   push:
     branches: [ "main" ]
+permissions: 
+  issues: write
 jobs:
   build:
     continue-on-error: true
-    env:
-      matrix_size: 5000
     strategy:
       matrix:
         number_processors: [ 1, 2, 4 ]
@@ -21,6 +21,4 @@ jobs:
         mpicc -O3 -o allshortestpair MyMPI.c allshortestpair.c -lm
         mpicc -O3 -o gen_adj_matrix gen_adj_matrix.c
     - name: Run project
-      run: |
-        ./gen_adj_matrix $matrix_size ./$matrix_size.bin
-        mpiexec -n ${{ matrix.number_processors }} ./allshortestpair ./$matrix_size.bin
+      run: mpiexec -n ${{ matrix.number_processors }} ./allshortestpair ./matrices/1000.bin
