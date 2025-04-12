@@ -11,5 +11,7 @@ jobs:
       uses: actions/checkout@v4
     - name: install mpich library
       run: sudo apt install mpich
-    - name: make
-      run: make all
+    - name: build
+      run: |
+        mpicc -O3 -o allshortestpair MyMPI.c allshortestpair.c -lm
+        mpicc -O3 -o allshortestpair gen_adj_matrix.c
