@@ -5,10 +5,11 @@ on:
 jobs:
   build:
     continue-on-error: true
+    env:
+      matrix_size: 5000
     strategy:
       matrix:
         number_processors: [ 1, 2, 4 ]
-        matrix_size: [ 4, 8, 16, 32, 1000 ]
     runs-on: ubuntu-latest
     steps:
     - name: Get code
@@ -20,4 +21,6 @@ jobs:
         mpicc -O3 -o allshortestpair MyMPI.c allshortestpair.c -lm
         mpicc -O3 -o gen_adj_matrix gen_adj_matrix.c
     - name: Run project
-      run: mpiexec -n ${{ matrix.number_processors }} ./allshortestpair ./matrices/${{ matrix.matrix_size }}.bin
+      run: |
+        ./gen_adj_matrix $matrix_size ./$matrix_size.bin
+        mpiexec -n ${{ matrix.number_processors }} ./allshortestpair ./$matrix_size.bin
